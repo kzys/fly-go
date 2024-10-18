@@ -312,7 +312,7 @@ func handleAPIError(statusCode int, responseBody []byte) error {
 			Message string `json:"message,omitempty"`
 		}{}
 		if err := json.Unmarshal(responseBody, &apiErr); err != nil {
-			return fmt.Errorf("request returned non-2xx status, %d", statusCode)
+			return fmt.Errorf("request returned non-2xx status, %d: %s", statusCode, string(responseBody))
 		}
 		if apiErr.Message != "" {
 			return fmt.Errorf("%s", apiErr.Message)
